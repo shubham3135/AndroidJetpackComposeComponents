@@ -21,6 +21,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.shubhamkumarwinner.composecomponents.ui.theme.ComposeComponentsTheme
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,11 +30,48 @@ class MainActivity : ComponentActivity() {
             ComposeComponentsTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    LinearProgressIndicatorSample()
+                    ModalDrawerSample()
                 }
             }
         }
     }
+}
+
+//modalDrawer
+@Composable
+fun ModalDrawerSample() {
+    val drawerState = rememberDrawerState(DrawerValue.Closed)
+    val scope = rememberCoroutineScope()
+
+    ModalDrawer(
+        drawerState = drawerState,
+        drawerContent = {
+            Column {
+                Text("Text in Drawer")
+                Button(onClick = {
+                    scope.launch {
+                        drawerState.close()
+                    }
+                }) {
+                    Text("Close Drawer")
+                }
+            }
+        },
+        content = {
+            Column {
+                Text("Text in Bodycontext")
+                Button(onClick = {
+
+                    scope.launch {
+                        drawerState.open()
+                    }
+
+                }) {
+                    Text("Click to open")
+                }
+            }
+        }
+    )
 }
 
 //linearProgressIndicator
@@ -278,6 +316,6 @@ fun Greeting(name: String) {
 @Composable
 fun DefaultPreview() {
     ComposeComponentsTheme {
-        LinearProgressIndicatorSample()
+        ModalDrawerSample()
     }
 }
