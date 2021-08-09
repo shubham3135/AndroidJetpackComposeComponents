@@ -4,10 +4,12 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
@@ -31,10 +33,24 @@ class MainActivity : ComponentActivity() {
             ComposeComponentsTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    SwitchDemo()
+                    SurfaceDemo()
                 }
             }
         }
+    }
+}
+
+//surface
+@Composable
+fun SurfaceDemo() {
+    Surface(
+        modifier = Modifier.padding(8.dp),
+        border = BorderStroke(2.dp, Color.Red),
+        contentColor = Color.Blue,
+        elevation = 8.dp,
+        shape = CircleShape
+    ) {
+        Text("Hello World", modifier = Modifier.padding(8.dp))
     }
 }
 
@@ -417,6 +433,6 @@ fun Greeting(name: String) {
 @Composable
 fun DefaultPreview() {
     ComposeComponentsTheme {
-        SnackbarDemo()
+        SurfaceDemo()
     }
 }
