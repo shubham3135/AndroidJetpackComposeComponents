@@ -12,7 +12,10 @@ import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -34,10 +37,38 @@ class MainActivity : ComponentActivity() {
             ComposeComponentsTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    TextFieldDemo()
+                    TopAppBarSample()
                 }
             }
         }
+    }
+}
+
+//topAppBar
+@Composable
+fun TopAppBarSample(){
+    Column {
+        TopAppBar(
+            elevation = 4.dp,
+            title = {
+                Text("I'm a TopAppBar")
+            },
+            backgroundColor =  MaterialTheme.colors.primarySurface,
+            navigationIcon = {
+                IconButton(onClick = {/* Do Something*/ }) {
+                    Icon(Icons.Filled.ArrowBack, null)
+                }
+            }, actions = {
+                IconButton(onClick = {/* Do Something*/ }) {
+                    Icon(Icons.Filled.Share, null)
+                }
+                IconButton(onClick = {/* Do Something*/ }) {
+                    Icon(Icons.Filled.Settings, null)
+                }
+            })
+
+        Text("Hello World")
+
     }
 }
 
@@ -447,6 +478,6 @@ fun Greeting(name: String) {
 @Composable
 fun DefaultPreview() {
     ComposeComponentsTheme {
-        TextFieldDemo()
+        TopAppBarSample()
     }
 }
