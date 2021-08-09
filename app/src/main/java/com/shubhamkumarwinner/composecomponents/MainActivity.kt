@@ -31,11 +31,29 @@ class MainActivity : ComponentActivity() {
             ComposeComponentsTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    RadioButtonSample()
+                    ScaffoldDemo()
                 }
             }
         }
     }
+}
+
+//scaffold
+@Composable
+fun ScaffoldDemo() {
+    val materialBlue700= Color(0xFF1976D2)
+    val scaffoldState = rememberScaffoldState(rememberDrawerState(DrawerValue.Open))
+    Scaffold(
+        scaffoldState = scaffoldState,
+        topBar = { TopAppBar(title = {Text("TopAppBar")},backgroundColor = materialBlue700)  },
+        floatingActionButtonPosition = FabPosition.End,
+        floatingActionButton = { FloatingActionButton(onClick = {}){
+            Text("X")
+        } },
+        drawerContent = { Text(text = "drawerContent") },
+        content = { Text("BodyContent") },
+        bottomBar = { BottomAppBar(backgroundColor = materialBlue700) { Text("BottomAppBar") } }
+    )
 }
 
 //radioButton
@@ -350,6 +368,6 @@ fun Greeting(name: String) {
 @Composable
 fun DefaultPreview() {
     ComposeComponentsTheme {
-        RadioButtonSample()
+        ScaffoldDemo()
     }
 }
