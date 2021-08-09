@@ -7,6 +7,7 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
@@ -30,8 +31,41 @@ class MainActivity : ComponentActivity() {
             ComposeComponentsTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    ModalDrawerSample()
+                    RadioButtonSample()
                 }
+            }
+        }
+    }
+}
+
+//radioButton
+@Composable
+fun RadioButtonSample() {
+    val radioOptions = listOf("A", "B", "C")
+    val (selectedOption, onOptionSelected) = remember { mutableStateOf(radioOptions[1] ) }
+    Column {
+        radioOptions.forEach { text ->
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .selectable(
+                        selected = (text == selectedOption),
+                        onClick = {
+                            onOptionSelected
+                            (text)
+                        }
+                    )
+                    .padding(horizontal = 16.dp)
+            ) {
+                RadioButton(
+                    selected = (text == selectedOption),
+                    onClick = { onOptionSelected(text) }
+                )
+                Text(
+                    text = text,
+                    style = MaterialTheme.typography.body1.merge(),
+                    modifier = Modifier.padding(start = 16.dp)
+                )
             }
         }
     }
@@ -316,6 +350,6 @@ fun Greeting(name: String) {
 @Composable
 fun DefaultPreview() {
     ComposeComponentsTheme {
-        ModalDrawerSample()
+        RadioButtonSample()
     }
 }
