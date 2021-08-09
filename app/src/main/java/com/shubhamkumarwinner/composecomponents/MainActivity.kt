@@ -28,10 +28,23 @@ class MainActivity : ComponentActivity() {
             ComposeComponentsTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    AlertDialogSample()
+                    ButtonExample()
                 }
             }
         }
+    }
+}
+
+//button
+@Composable
+fun ButtonExample() {
+    Button(
+        onClick = { /* Do something! */ },
+        colors = ButtonDefaults.textButtonColors(
+            backgroundColor = Color.Red
+        )
+    ) {
+        Text("Button")
     }
 }
 
