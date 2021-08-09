@@ -8,6 +8,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,11 +29,22 @@ class MainActivity : ComponentActivity() {
             ComposeComponentsTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    CheckBoxDemo()
+                    ExtendedFloatingActionButtonDemo()
                 }
             }
         }
     }
+}
+
+//floating action button
+@Composable
+fun ExtendedFloatingActionButtonDemo() {
+    ExtendedFloatingActionButton(
+        icon = { Icon(Icons.Filled.Favorite,"") },
+        text = { Text("FloatingActionButton") },
+        onClick = { /*do something*/ },
+        elevation = FloatingActionButtonDefaults.elevation(8.dp)
+    )
 }
 
 //checkbox
@@ -229,6 +242,6 @@ fun Greeting(name: String) {
 @Composable
 fun DefaultPreview() {
     ComposeComponentsTheme {
-        CheckBoxDemo()
+        ExtendedFloatingActionButtonDemo()
     }
 }
