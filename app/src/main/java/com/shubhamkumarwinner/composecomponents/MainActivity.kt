@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -33,10 +34,23 @@ class MainActivity : ComponentActivity() {
             ComposeComponentsTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    SurfaceDemo()
+                    TextFieldDemo()
                 }
             }
         }
+    }
+}
+
+//textField
+@Composable
+fun TextFieldDemo() {
+    Column(Modifier.padding(16.dp)) {
+        val textState = remember { mutableStateOf(TextFieldValue()) }
+        TextField(
+            value = textState.value,
+            onValueChange = { textState.value = it }
+        )
+        Text("The textfield has this text: " + textState.value.text)
     }
 }
 
@@ -433,6 +447,6 @@ fun Greeting(name: String) {
 @Composable
 fun DefaultPreview() {
     ComposeComponentsTheme {
-        SurfaceDemo()
+        TextFieldDemo()
     }
 }
