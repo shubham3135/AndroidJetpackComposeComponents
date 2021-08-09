@@ -31,10 +31,22 @@ class MainActivity : ComponentActivity() {
             ComposeComponentsTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    ScaffoldDemo()
+                    MySliderDemo()
                 }
             }
         }
+    }
+}
+
+//slider
+@Composable
+fun MySliderDemo() {
+    var sliderPosition by remember { mutableStateOf(0f) }
+    Column {
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(text = sliderPosition.toString())
+        Spacer(modifier = Modifier.height(10.dp))
+        Slider(value = sliderPosition, onValueChange = { sliderPosition = it })
     }
 }
 
@@ -368,6 +380,6 @@ fun Greeting(name: String) {
 @Composable
 fun DefaultPreview() {
     ComposeComponentsTheme {
-        ScaffoldDemo()
+        MySliderDemo()
     }
 }
