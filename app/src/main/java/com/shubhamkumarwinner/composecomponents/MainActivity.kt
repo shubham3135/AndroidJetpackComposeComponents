@@ -3,14 +3,12 @@ package com.shubhamkumarwinner.composecomponents
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.SpanStyle
@@ -28,9 +26,44 @@ class MainActivity : ComponentActivity() {
             ComposeComponentsTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    ButtonExample()
+                    CircularProgressIndicatorSample()
                 }
             }
+        }
+    }
+}
+
+// circularProgressIndicator
+@Composable
+fun CircularProgressIndicatorSample() {
+    var progress by remember { mutableStateOf(0.1f) }
+    val animatedProgress = animateFloatAsState(
+        targetValue = progress,
+        animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec
+    ).value
+
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Spacer(Modifier.height(30.dp))
+        Text("CircularProgressIndicator with undefined progress")
+        CircularProgressIndicator()
+        Spacer(Modifier.height(30.dp))
+        Text("CircularProgressIndicator with progress set by buttons")
+        CircularProgressIndicator(progress = animatedProgress)
+        Spacer(Modifier.height(30.dp))
+        OutlinedButton(
+            onClick = {
+                if (progress < 1f) progress += 0.1f
+            }
+        ) {
+            Text("Increase")
+        }
+
+        OutlinedButton(
+            onClick = {
+                if (progress > 0f) progress -= 0.1f
+            }
+        ) {
+            Text("Decrease")
         }
     }
 }
@@ -145,6 +178,6 @@ fun Greeting(name: String) {
 @Composable
 fun DefaultPreview() {
     ComposeComponentsTheme {
-        AlertDialogSample()
+        CircularProgressIndicatorSample()
     }
 }
