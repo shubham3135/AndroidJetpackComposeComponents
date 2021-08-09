@@ -31,11 +31,21 @@ class MainActivity : ComponentActivity() {
             ComposeComponentsTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    SnackbarDemo()
+                    SwitchDemo()
                 }
             }
         }
     }
+}
+
+//switch
+@Composable
+fun SwitchDemo() {
+    val checkedState = remember { mutableStateOf(true) }
+    Switch(
+        checked = checkedState.value,
+        onCheckedChange = { checkedState.value = it }
+    )
 }
 
 //slider
