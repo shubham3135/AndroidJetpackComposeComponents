@@ -31,7 +31,7 @@ class MainActivity : ComponentActivity() {
             ComposeComponentsTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    MySliderDemo()
+                    SnackbarDemo()
                 }
             }
         }
@@ -47,6 +47,33 @@ fun MySliderDemo() {
         Text(text = sliderPosition.toString())
         Spacer(modifier = Modifier.height(10.dp))
         Slider(value = sliderPosition, onValueChange = { sliderPosition = it })
+    }
+}
+
+//snackbar
+@Composable
+fun SnackbarDemo() {
+    Column {
+        val snackbarVisibleState = remember { mutableStateOf(false) }
+
+        Button(onClick = { snackbarVisibleState.value = !snackbarVisibleState.value }) {
+            if (snackbarVisibleState.value) {
+                Text("Hide Snackbar")
+            } else {
+                Text("Show Snackbar")
+            }
+        }
+        if (snackbarVisibleState.value) {
+            Snackbar(
+
+                action = {
+                    Button(onClick = {}) {
+                        Text("MyAction")
+                    }
+                },
+                modifier = Modifier.padding(8.dp)
+            ) { Text(text = "This is a snackbar!") }
+        }
     }
 }
 
@@ -380,6 +407,6 @@ fun Greeting(name: String) {
 @Composable
 fun DefaultPreview() {
     ComposeComponentsTheme {
-        MySliderDemo()
+        SnackbarDemo()
     }
 }
