@@ -27,11 +27,21 @@ class MainActivity : ComponentActivity() {
             ComposeComponentsTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    DropdownDemo()
+                    CheckBoxDemo()
                 }
             }
         }
     }
+}
+
+//checkbox
+@Composable
+fun CheckBoxDemo() {
+    val checkedState = remember { mutableStateOf(true) }
+    Checkbox(
+        checked = checkedState.value,
+        onCheckedChange = { checkedState.value = it }
+    )
 }
 
 //dropDownMenu
@@ -219,6 +229,6 @@ fun Greeting(name: String) {
 @Composable
 fun DefaultPreview() {
     ComposeComponentsTheme {
-        DropdownDemo()
+        CheckBoxDemo()
     }
 }
